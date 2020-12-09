@@ -3,8 +3,31 @@ image_to_c
 
 A command line tool for turning binary image files into C source code. The output is an array of unsigned chars and is sent to stdout. Included are comments detailing the image type, size and other details.<br>
 <br>
-<b>Why did you write it?</b><br>
-My existing tool (bin_to_c) is similar in that it generates C arrays to compile file data directly into a project. I have used this tool to create many .H files to include with my projects, but the filename alone isn't enough to know the details of the image file contained in the data. Instead of manually adding this information to each file, I came up with the idea of combining my imageinfo tool with the bin_to_c tool to make something even more useful.<br>
+
+### **What's the diffrent from master branch?**
+It's rebuild with python.
+
+### **HOW TO USE**
+~~~bash
+$ python3 convey.py [path_to_your_image]
+~~~
+
+### **NOTICE**
+> if you input an video stream, the output will only show The first image  
+
+> to develop more in/out types, you can add more `if` branch below
+~~~python
+for j in range(y):
+        if array_format == "uint16_t":
+            if color_format == "rgb565":
+                res = (img[i][j][0]) * (2**8) + img[i][j][1]
+                file.write('%#x'%res+",")
+        elif array_format == "uint8_t":
+            if color_format == "rgb565":
+                file.write('%#x'%img[i][j][1]+",")
+                file.write('%#x'%img[i][j][0]+",")
+~~~
+
 <b>What does the output look like?</b><br>
 Here's an example of a before and after of what this new tool does:<br>
 
